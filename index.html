@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🚀 Auto Installer Pterodactyl</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
+    body {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #0f172a, #1e293b, #0d9488);
+      color: white; flex-direction: column; padding: 20px;
+    }
+    h1 { font-size: 2.2rem; margin-bottom: 20px;
+      background: linear-gradient(90deg, #22c55e, #06b6d4);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      animation: glow 2s infinite alternate;
+    }
+    @keyframes glow { from { text-shadow: 0 0 10px #22c55e; } to { text-shadow: 0 0 20px #06b6d4; } }
+    form {
+      width: 100%; max-width: 400px; background: rgba(255, 255, 255, 0.05);
+      padding: 25px; border-radius: 16px; box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      backdrop-filter: blur(10px); animation: fadeIn 1s ease-in-out; margin-bottom: 20px;
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    input {
+      width: 100%; padding: 12px; margin: 8px 0; border-radius: 8px; border: none; outline: none;
+      background: #1e293b; color: white; font-size: 0.95rem; transition: 0.3s;
+    }
+    input:focus { background: #334155; box-shadow: 0 0 0 2px #22c55e; }
+    button {
+      width: 100%; padding: 12px; margin-top: 10px; border: none; border-radius: 8px;
+      background: linear-gradient(90deg, #22c55e, #06b6d4); color: white; font-size: 1rem; font-weight: bold;
+      cursor: pointer; transition: transform 0.2s;
+    }
+    button:hover { transform: scale(1.05); }
+    pre {
+      margin-top: 25px; width: 100%; max-width: 600px; height: 300px; overflow-y: auto;
+      background: #0f172a; padding: 15px; border-radius: 12px; text-align: left;
+      font-size: 0.9rem; line-height: 1.4rem; box-shadow: inset 0 0 10px rgba(0,0,0,0.6);
+    }
+    footer { margin-top: 30px; text-align: center; font-size: 0.9rem; color: #94a3b8; }
+    .socials { margin-top: 10px; display: flex; justify-content: center; gap: 15px; }
+    .socials a { color: white; transition: 0.3s; }
+    .socials a:hover { color: #22c55e; transform: scale(1.2); }
+    .socials svg { width: 28px; height: 28px; fill: currentColor; }
+  </style>
+</head>
+<body>
+  <h1>🚀 Auto Installer Pterodactyl</h1>
+
+  <!-- FORM INSTALL -->
+  <form id="installForm">
+    <input type="text" name="ip" placeholder="IP VPS" required>
+    <input type="text" name="user" placeholder="Username (default root)">
+    <input type="password" name="password" placeholder="Password VPS" required>
+    <input type="text" name="panel" placeholder="Domain Panel" required>
+    <input type="text" name="node" placeholder="Domain Node" required>
+    <input type="text" name="ram" placeholder="RAM Server (MB)" required>
+    <input type="text" name="userpanel" placeholder="Username Panel" required>
+    <input type="email" name="email" placeholder="Email Panel" required>
+    <button type="submit">Install Panel</button>
+  </form>
+
+  <pre id="output"></pre>
+
+  <!-- FORM UNINSTALL -->
+  <form id="uninstallForm">
+    <input type="text" name="ip" placeholder="IP VPS" required>
+    <input type="password" name="password" placeholder="Password VPS" required>
+    <button type="submit" style="background: linear-gradient(90deg, #ef4444, #dc2626);">Uninstall Panel</button>
+  </form>
+
+  <pre id="outputUninstall"></pre>
+
+  <footer>
+    <p>© 2025 Zerone Official — All rights reserved</p>
+    <div class="socials">
+      <a href="https://wa.me/6283840390064" target="_blank" title="WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1C339-2.9 239.1-26.6 162.1 19.1 95.9 60.9 61.7 134.5 70.1 207.1l-27.1 97.1c-2.5 9.1 6.4 17.1 15.1 13.2l96.8-40c73.6 39.1 162.5 33.3 226-15.6 66.5-51.7 90.7-143.4 53.7-229.7z"/></svg>
+      </a>
+      <a href="https://t.me/ZeroneOfficial" target="_blank" title="Telegram">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M248,8C111,8,0,119,0,256c0,137,111,248,248,248c137,0,248-111,248-248C496,119,385,8,248,8z M366,176.5L324.2,369c-2.9,12.7-10.4,15.9-21.1,9.9l-58.2-42.9l-28.1,27c-3.1,3.1-5.6,5.6-11.5,5.6l4.1-58.7l106.9-96.6c4.6-4.1-1-6.5-7.1-2.4l-132,83l-56.9-17.8c-12.4-3.9-12.7-12.4,2.6-18.4l221.9-85.5C359.8,167.5,369.4,170.9,366,176.5z"/></svg>
+      </a>
+      <a href="https://www.youtube.com/@ZeroOffc" target="_blank" title="YouTube">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M549.7 124.1c-6.3-23.7-24.9-42.3-48.6-48.6C465.6 64 288 64 288 64S110.4 64 74.9 75.5c-23.7 6.3-42.3 24.9-48.6 48.6C16 159.6 16 256 16 256s0 96.4 10.3 131.9c6.3 23.7 24.9 42.3 48.6 48.6C110.4 448 288 448 288 448s177.6 0 213.1-11.5c23.7-6.3 42.3-24.9 48.6-48.6C560 352.4 560 256 560 256S560 159.6 549.7 124.1zM232 336V176l142 80-142 80z"/></svg>
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    async function handleForm(formId, outputId, endpoint) {
+      document.getElementById(formId).addEventListener('submit', async (e) => {
+        e.preventDefault();
+        let data = Object.fromEntries(new FormData(e.target).entries());
+        document.getElementById(outputId).textContent = "⏳ Processing...\n";
+
+        let res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+
+        let reader = res.body.getReader();
+        let decoder = new TextDecoder("utf-8");
+        while(true) {
+          let { done, value } = await reader.read();
+          if (done) break;
+          document.getElementById(outputId).textContent += decoder.decode(value);
+        }
+      });
+    }
+
+    handleForm("installForm", "output", "/install");
+    handleForm("uninstallForm", "outputUninstall", "/uninstall");
+  </script>
+</body>
+</html>
